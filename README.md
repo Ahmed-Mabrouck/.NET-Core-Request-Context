@@ -15,24 +15,10 @@
   - It has an event loop with Garbage Collection trigger every 5 seconds which can be used for debugging the application and investigating memory allocation.
 ## How to Configure It ?
 ### Implemenation
-You can switch between the AsyncLocal implementation and ThreadLocal implementation within Main() function inside Context.ConsoleAppWithContext Program.cs
+You can switch between the AsyncLocal implementation and ThreadLocal implementation by selecting build configuration profile [Async Local, and Thread Local]
 
-[Starting from line 19 to line 22](https://github.com/AhmedMabrouck/.NET-Core-Request-Context/blob/65aa2b970bcb3640f242d92adc99bab582e87ae6/Context.ConsoleAppWithContext/Program.cs#L19-L22)
+![Build Profile](https://github.com/Ahmed-Mabrouck/.NET-Core-Request-Context/assets/13695213/743089f7-f566-4676-9261-4ae3439da18a)
 
-If you choose this comment/uncomment setup, AsyncLocal ContextProvider service implementation will be injected into IoC container.
-```csharp
-builder.Services.AddTransient<IContextProvider<HttpRequestContext>, ContextProvider.Request.RequestContextProvider<HttpRequestContext>>();
-builder.Services.AddTransient<IContextProvider<MessageRequestContext>, ContextProvider.Request.RequestContextProvider<MessageRequestContext>>();
-//builder.Services.AddTransient<IContextProvider<HttpRequestContext>, ContextProvider.Thread.ThreadContextProvider<HttpRequestContext>>();
-//builder.Services.AddTransient<IContextProvider<MessageRequestContext>, ContextProvider.Thread.ThreadContextProvider<MessageRequestContext>>();
-```
-If you choose this comment/uncomment setup, ThreadLocal ContextProvider service implementation will be injected into IoC container.
-```csharp
-//builder.Services.AddTransient<IContextProvider<HttpRequestContext>, ContextProvider.Request.RequestContextProvider<HttpRequestContext>>();
-//builder.Services.AddTransient<IContextProvider<MessageRequestContext>, ContextProvider.Request.RequestContextProvider<MessageRequestContext>>();
-builder.Services.AddTransient<IContextProvider<HttpRequestContext>, ContextProvider.Thread.ThreadContextProvider<HttpRequestContext>>();
-builder.Services.AddTransient<IContextProvider<MessageRequestContext>, ContextProvider.Thread.ThreadContextProvider<MessageRequestContext>>();
-```
 ### Number of Requests
 You can change number of simulated requests by changing n varibale value in Context.ConsoleAppWithContext Program.cs [Line 44](https://github.com/AhmedMabrouck/.NET-Core-Request-Context/blob/65aa2b970bcb3640f242d92adc99bab582e87ae6/Context.ConsoleAppWithContext/Program.cs#L44C17-L44C17)
 
