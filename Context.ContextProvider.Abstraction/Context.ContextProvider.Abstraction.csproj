@@ -4,6 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Configurations>Async Local;Thread Local</Configurations>
   </PropertyGroup>
 
   <ItemGroup>

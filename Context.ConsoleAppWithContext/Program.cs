@@ -14,13 +14,14 @@ namespace Context.ConsoleAppWithContext
             // Prepare IoC container and inject all services in a transient scope.
             HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
 
-            // You can choose between AsyncLocal (RequestContext) and ThreadLocal (ThreadContext)
-            // by commenting/uncommenting each couple of lines.
+            // You can change build configuration profile Async Local or Thread Local to choose the ContextProvider service implementation.
+#if ASYNC_LOCAL
             builder.Services.AddTransient<IContextProvider<HttpRequestContext>, ContextProvider.Request.RequestContextProvider<HttpRequestContext>>();
             builder.Services.AddTransient<IContextProvider<MessageRequestContext>, ContextProvider.Request.RequestContextProvider<MessageRequestContext>>();
-            //builder.Services.AddTransient<IContextProvider<HttpRequestContext>, ContextProvider.Thread.ThreadContextProvider<HttpRequestContext>>();
-            //builder.Services.AddTransient<IContextProvider<MessageRequestContext>, ContextProvider.Thread.ThreadContextProvider<MessageRequestContext>>();
-
+#elif THREAD_LOCAL
+            builder.Services.AddTransient<IContextProvider<HttpRequestContext>, ContextProvider.Thread.ThreadContextProvider<HttpRequestContext>>();
+            builder.Services.AddTransient<IContextProvider<MessageRequestContext>, ContextProvider.Thread.ThreadContextProvider<MessageRequestContext>>();
+#endif
             builder.Services.AddTransient<IRequestHandler<HttpRequestContext>, HttpRequestHandler>();
             builder.Services.AddTransient<IRequestHandler<MessageRequestContext>, MessageRequestHandler>();
 
