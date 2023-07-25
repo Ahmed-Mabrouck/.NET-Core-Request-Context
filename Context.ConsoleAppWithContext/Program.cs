@@ -16,10 +16,10 @@ namespace Context.ConsoleAppWithContext
 
             // You can choose between AsyncLocal (RequestContext) and ThreadLocal (ThreadContext)
             // by commenting/uncommenting each couple of lines.
-            //builder.Services.AddTransient<IContextProvider<HttpRequestContext>, ContextProvider.Request.RequestContextProvider<HttpRequestContext>>();
-            //builder.Services.AddTransient<IContextProvider<MessageRequestContext>, ContextProvider.Request.RequestContextProvider<MessageRequestContext>>();
-            builder.Services.AddTransient<IContextProvider<HttpRequestContext>, ContextProvider.Thread.ThreadContextProvider<HttpRequestContext>>();
-            builder.Services.AddTransient<IContextProvider<MessageRequestContext>, ContextProvider.Thread.ThreadContextProvider<MessageRequestContext>>();
+            builder.Services.AddTransient<IContextProvider<HttpRequestContext>, ContextProvider.Request.RequestContextProvider<HttpRequestContext>>();
+            builder.Services.AddTransient<IContextProvider<MessageRequestContext>, ContextProvider.Request.RequestContextProvider<MessageRequestContext>>();
+            //builder.Services.AddTransient<IContextProvider<HttpRequestContext>, ContextProvider.Thread.ThreadContextProvider<HttpRequestContext>>();
+            //builder.Services.AddTransient<IContextProvider<MessageRequestContext>, ContextProvider.Thread.ThreadContextProvider<MessageRequestContext>>();
 
             builder.Services.AddTransient<IRequestHandler<HttpRequestContext>, HttpRequestHandler>();
             builder.Services.AddTransient<IRequestHandler<MessageRequestContext>, MessageRequestHandler>();
